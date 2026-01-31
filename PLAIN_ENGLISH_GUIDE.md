@@ -1,860 +1,1016 @@
-# 🎯 CAMPUS MEME ECONOMY - EXPLAINED LIKE YOU'RE 5
+# 🎯 CAMPUS MEME ECONOMY - PLAIN ENGLISH GUIDE
+## Understanding the ACTUAL Code (Updated for Working System)
+
+---
 
 ## 🤔 WHAT IS PROGRAMMING? (For Absolute Beginners)
 
-### Think of Programming Like Cooking
+### Think of Programming Like Following a Recipe
 
-**Cooking a Recipe:**
-1. Get ingredients (data)
-2. Follow steps (code)
-3. Get final dish (output)
+**Making a Sandwich:**
+1. Get bread from cupboard (reading data)
+2. Put cheese on bread (processing)
+3. Close sandwich (writing data)
+4. Eat it! (output/result)
 
-**Programming:**
-1. Get information (from user or files)
-2. Follow instructions (your code)
-3. Get result (show on screen or save to file)
-
----
-
-## 🎮 WHAT IS OUR PROJECT? (In Simple Words)
-
-Imagine your campus is a video game where:
-- **Doing good things** = Earn points (MemeCoins)
-- **Points** = Buy cool stuff (Perks)
-- **Everyone competes** = Leaderboards
-- **Create & trade** = Memes as collectibles
-
-### Real-Life Example:
-```
-Ahmed helps Rahat with coding
-    ↓
-Rahat gives Ahmed 10 MemeCoins
-    ↓
-Ahmed saves up 30 coins
-    ↓
-Ahmed buys "Skip Canteen Queue" perk
-    ↓
-Ahmed wins! He saved time and got lunch faster!
-```
+**Our Program:**
+1. Read student data from file (open students.txt)
+2. Process it (add coins, check quests)
+3. Save changes back to file (write students.txt)
+4. Show result to user (print on screen)
 
 ---
 
-## 📝 HOW DOES IT WORK? (Step by Step)
+## 🎮 WHAT DOES OUR PROGRAM DO?
 
-### STEP 1: STORING INFORMATION
-
-**In Real Life:**
-You have a notebook where you write down:
-- Student names
-- How many coins they have
-- What they've done
-
-**In Our Program:**
-We have TEXT FILES that store the same information:
-```
-students.txt contains:
-NSU210101|Rahat Ahmed|420|5
-↑         ↑           ↑   ↑
-ID        Name        Coins Level
-```
-
-**What the | means:** It's like a separator (like using commas in a list)
+Imagine campus life as a video game where:
+- **Help others** = Earn MemeCoins 💰
+- **Spend coins** = Get real perks 🎁
+- **Create memes** = Collectible NFTs 🎨
+- **Compete** = Leaderboards 🏆
 
 ---
 
-### STEP 2: READING THE INFORMATION
+## 📂 THE FILE SYSTEM (How Data is Stored)
 
-**In Real Life:**
-You open your notebook and read what's written
+### Our "Database" is Just Text Files!
 
-**In Our Program:**
+When you run the program, it creates a `data/` folder with these files:
+
+```
+data/
+├── students.txt          ← All student profiles
+├── quests.txt            ← All quests
+├── memes.txt             ← All meme NFTs
+├── perks.txt             ← Available perks (auto-created!)
+├── inventory.txt         ← What students bought
+└── transactions.txt      ← All coin transfers
+```
+
+**Example of students.txt:**
+```
+NSU210101|Ahmed Khan|150|2|Noob|10||First Blood
+NSU210102|Rahat Ali|120|2|Noob|5||
+```
+
+Each `|` separates a field (like columns in a spreadsheet)
+
+---
+
+## 🔄 COMPLETE EXAMPLE: Student Completes a Quest
+
+Let me show you **EXACTLY** what happens in the code:
+
+### **SCENARIO: Ahmed Completes a Quest**
+
+```
+┌─────────────────────────────────────────────────┐
+│ STEP 1: Ahmed Opens the Program                │
+│ File: main.py runs                              │
+└─────────────────────────────────────────────────┘
+         ↓
+    User sees:
+    "1. Login  2. Register"
+    Ahmed chooses 1 (Login)
+
+┌─────────────────────────────────────────────────┐
+│ STEP 2: Login Process                          │
+│ File: member1_profiles.py                       │
+│ Function: login_student()                       │
+└─────────────────────────────────────────────────┘
+         ↓
+    Code does this:
+    1. Opens students.txt
+    2. Reads each line
+    3. Splits line: NSU210101|Ahmed Khan|100|1|...
+    4. Checks if ID matches "NSU210101"
+    5. Found it! Returns student_id
+    
+    User sees:
+    "✅ Welcome back, Ahmed Khan!"
+    "🪙 Balance: 100 MemeCoins"
+
+┌─────────────────────────────────────────────────┐
+│ STEP 3: Ahmed Opens Quest Board                │
+│ File: main.py                                    │
+│ Choice: 2 (Quest Board)                         │
+└─────────────────────────────────────────────────┘
+         ↓
+    main.py calls:
+    quests.quest_menu(student_id="NSU210101")
+
+┌─────────────────────────────────────────────────┐
+│ STEP 4: Ahmed Accepts Quest Q001               │
+│ File: member2_quests.py                         │
+│ Function: accept_quest()                        │
+└─────────────────────────────────────────────────┘
+         ↓
+    Code does this:
+    1. Opens quests.txt
+    2. Finds: Q001|Help 5 Juniors|...|Active|
+    3. Adds Ahmed to participants
+    4. Saves: Q001|Help 5 Juniors|...|Active|NSU210101
+    
+    User sees:
+    "✅ Quest accepted!"
+
+┌─────────────────────────────────────────────────┐
+│ STEP 5: Ahmed Does the Work (Real Life!)       │
+│ Ahmed actually helps 5 juniors study            │
+│ (This happens outside the program)              │
+└─────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────┐
+│ STEP 6: Ahmed Completes Quest                  │
+│ File: member2_quests.py                         │
+│ Function: complete_quest()                      │
+└─────────────────────────────────────────────────┘
+         ↓
+    Code does this:
+    
+    1. CHECK: Did Ahmed accept this quest?
+       Read quests.txt → Q001|...|NSU210101
+       YES ✓
+    
+    2. CHECK: Is quest still active?
+       Read status → "Active"
+       YES ✓
+    
+    3. MARK QUEST COMPLETE:
+       Change: Active → Completed
+       Save back to quests.txt
+    
+    4. GIVE REWARD (calls Member 1!):
+       profiles.update_student_coins("NSU210101", 50)
+
+┌─────────────────────────────────────────────────┐
+│ STEP 7: Update Ahmed's Coins                   │
+│ File: member1_profiles.py                       │
+│ Function: update_student_coins()                │
+└─────────────────────────────────────────────────┘
+         ↓
+    Code does this:
+    
+    1. READ all students from students.txt
+       students = [
+           {id: "NSU210101", coins: 100, ...},
+           {id: "NSU210102", coins: 120, ...}
+       ]
+    
+    2. FIND Ahmed (NSU210101)
+       old_coins = 100
+    
+    3. ADD reward coins
+       new_coins = 100 + 50 = 150
+    
+    4. CHECK for level up
+       old_level = (100 ÷ 100) + 1 = 2
+       new_level = (150 ÷ 100) + 1 = 2
+       No level up (same level)
+    
+    5. SAVE back to students.txt
+       NSU210101|Ahmed Khan|150|2|Noob|10||First Blood
+    
+    User sees:
+    "🎉 QUEST COMPLETED!"
+    "🪙 Earned 50 MemeCoins"
+
+┌─────────────────────────────────────────────────┐
+│ STEP 8: Check for Achievements                 │
+│ File: member2_quests.py                         │
+│ Function: count_completed_quests()              │
+└─────────────────────────────────────────────────┘
+         ↓
+    Code does this:
+    
+    1. Count quests Ahmed completed
+       completed_count = 1 (this is first!)
+    
+    2. IF count == 1:
+       Call: profiles.unlock_achievement("NSU210101", "First Blood")
+
+┌─────────────────────────────────────────────────┐
+│ STEP 9: Unlock Achievement                     │
+│ File: member1_profiles.py                       │
+│ Function: unlock_achievement()                  │
+└─────────────────────────────────────────────────┘
+         ↓
+    Code does this:
+    
+    1. READ Ahmed's achievements
+       current = ""  (empty)
+    
+    2. ADD "First Blood"
+       achievements = "First Blood"
+    
+    3. SAVE to students.txt
+       NSU210101|Ahmed Khan|150|2|Noob|10||First Blood
+    
+    User sees:
+    "🎉 ACHIEVEMENT UNLOCKED: First Blood!"
+
+┌─────────────────────────────────────────────────┐
+│ FINAL RESULT                                    │
+└─────────────────────────────────────────────────┘
+    Ahmed now has:
+    ✓ 150 MemeCoins (was 100)
+    ✓ 1 quest completed
+    ✓ "First Blood" achievement
+    ✓ Quest Q001 marked completed
+```
+
+---
+
+## 📚 HOW EACH MODULE ACTUALLY WORKS
+
+### 🧩 MEMBER 1: STUDENT PROFILE SYSTEM (member1_profiles.py)
+
+**What it REALLY does:** It's the "bank" - everyone asks it to manage coins.
+
+#### **Function 1: register_student()**
+
 ```python
-# In plain English:
-Open the file called "students.txt"
-Read each line
-Split the line at each | symbol
-Store the pieces in variables
-Close the file
+# In Plain English:
+
+Ask user: "What's your Student ID?"
+User types: "NSU210101"
+
+Check if ID already exists:
+    Open students.txt
+    Read each line
+    Split each line by "|"
+    If any ID matches "NSU210101":
+        Print "Already registered!"
+        Exit function
+    
+ID doesn't exist, so continue:
+Ask user: "What's your name?"
+User types: "Ahmed Khan"
+
+Create new student:
+    Open students.txt in "append" mode
+    Write new line:
+        "NSU210101|Ahmed Khan|100|1|Noob|0||\n"
+        (ID|name|starting coins|level 1|title|reputation|nfts|achievements)
+    Close file
+
+Print "✅ Welcome, Ahmed Khan!"
+Print "🪙 Starting balance: 100 MemeCoins"
 ```
 
-**Actual Code (simplified):**
+**Actual Code Location:** Lines 53-75 in member1_profiles.py
+
+---
+
+#### **Function 2: update_student_coins(student_id, amount)**
+
+This is THE MOST IMPORTANT function - everyone calls it!
+
 ```python
-open file "students.txt"
-for each line in the file:
-    split line by "|"
-    student_id = first piece
-    name = second piece
-    coins = third piece
-    level = fourth piece
+# In Plain English:
+
+Received: student_id = "NSU210101", amount = 50
+
+Step 1: GET all students
+    Open students.txt
+    Read each line into a list
+    students = [
+        {id: "NSU210101", name: "Ahmed", coins: 100, ...},
+        {id: "NSU210102", name: "Rahat", coins: 120, ...}
+    ]
+
+Step 2: FIND the right student
+    Loop through students:
+        If student['id'] == "NSU210101":
+            Found Ahmed!
+            old_coins = 100
+
+Step 3: UPDATE coins
+    student['coins'] = 100 + 50 = 150
+    
+    If coins become negative:
+        Set coins = 0 (prevent negative balance)
+
+Step 4: CHECK for level up
+    old_level = (100 ÷ 100) + 1 = 2
+    new_level = (150 ÷ 100) + 1 = 2
+    
+    If new_level != old_level:
+        student['level'] = new_level
+        
+        Update title based on level:
+            If level >= 10: title = "Legend"
+            If level >= 7:  title = "Meme Lord"
+            If level >= 4:  title = "Regular"
+            Else:           title = "Noob"
+        
+        Print "🎉 LEVEL UP!"
+
+Step 5: SAVE all students back
+    Open students.txt in "write" mode
+    For each student:
+        Write: "id|name|coins|level|title|...\n"
+    Close file
+
+Return True (success!)
 ```
+
+**Actual Code Location:** Lines 106-145 in member1_profiles.py
+
+**Who calls this function:**
+- Member 2 (Quests): `profiles.update_student_coins(student_id, reward)`
+- Member 3 (Memes): `profiles.update_student_coins(buyer_id, -price)`
+- Member 4 (Perks): `profiles.update_student_coins(student_id, -cost)`
+- Member 5 (Social): `profiles.update_student_coins(from_id, -amount)`
 
 ---
 
-### STEP 3: SHOWING INFORMATION
+### 🧩 MEMBER 2: QUEST SYSTEM (member2_quests.py)
 
-**In Real Life:**
-You tell someone what you read from the notebook
+**What it REALLY does:** Task board - create challenges, complete them, earn rewards.
 
-**In Our Program:**
+#### **Function: complete_quest(student_id, quest_id)**
+
 ```python
-# In plain English:
-Print "Student ID: NSU210101"
-Print "Name: Rahat Ahmed"
-Print "Coins: 420"
-Print "Level: 5"
+# In Plain English:
+
+Received: student_id = "NSU210101", quest_id = "Q001"
+
+Step 1: GET all quests
+    Open quests.txt
+    Read each line
+    quests = [
+        {id: "Q001", title: "Help Juniors", reward: 50, 
+         status: "Active", participants: "NSU210101"},
+        {id: "Q002", title: "Organize Event", reward: 30, 
+         status: "Active", participants: ""}
+    ]
+
+Step 2: FIND quest Q001
+    Loop through quests:
+        If quest['id'] == "Q001":
+            Found it!
+
+Step 3: CHECK if student accepted this quest
+    quest['participants'] = "NSU210101"
+    
+    If "NSU210101" NOT in participants:
+        Print "❌ You haven't accepted this quest!"
+        Return False
+    
+    YES, Ahmed accepted it ✓
+
+Step 4: CHECK if already completed
+    quest['status'] = "Active"
+    
+    If status == "Completed":
+        Print "❌ Already completed!"
+        Return False
+    
+    NO, still active ✓
+
+Step 5: MARK as completed
+    quest['status'] = "Completed"
+    
+    Save all quests back to quests.txt
+
+Step 6: GIVE REWARD (Call Member 1!)
+    reward = quest['reward'] = 50
+    
+    Call this function from Member 1:
+    profiles.update_student_coins("NSU210101", 50)
+    
+    Member 1 handles adding coins and level up!
+
+Step 7: CHECK for achievements
+    Count how many quests Ahmed completed:
+        completed_count = 1
+    
+    If completed_count == 1:
+        profiles.unlock_achievement("NSU210101", "First Blood")
+    
+    If completed_count == 10:
+        profiles.unlock_achievement("NSU210101", "Quest Master")
+
+Step 8: SHOW success message
+    Print "🎉 QUEST COMPLETED!"
+    Print "📜 Quest: Help 5 Juniors"
+    Print "🪙 Earned: 50 MemeCoins"
+
+Return True (success!)
 ```
+
+**Actual Code Location:** Lines 126-175 in member2_quests.py
 
 ---
 
-### STEP 4: UPDATING INFORMATION
+### 🧩 MEMBER 3: MEME NFT MARKETPLACE (member3_memes.py)
 
-**In Real Life:**
-You erase old number and write new number
+**What it REALLY does:** Create digital collectibles, trade them like cards.
 
-**In Our Program:**
+#### **Function: buy_meme(buyer_id, nft_id)**
+
 ```python
-# In plain English:
-Read all students from file
-Find the student we want to update
-Change their coins number
-Write everything back to the file
+# In Plain English:
+
+Received: buyer_id = "NSU210101", nft_id = "NFT001"
+
+Step 1: GET all memes
+    Open memes.txt
+    memes = [
+        {id: "NFT001", name: "Power Cut Meme", 
+         creator_id: "NSU210102", rarity: "Legendary",
+         price: 100, owner_id: "NSU210102", likes: 45}
+    ]
+
+Step 2: FIND the meme
+    Loop through memes:
+        If meme['id'] == "NFT001":
+            Found it!
+
+Step 3: CHECK if buyer already owns it
+    If meme['owner_id'] == buyer_id:
+        Print "❌ You already own this!"
+        Return False
+    
+    Different owner ✓
+
+Step 4: CHECK if buyer has enough coins
+    Call Member 1:
+    buyer = profiles.get_student_by_id("NSU210101")
+    buyer['coins'] = 150
+    
+    meme['price'] = 100
+    
+    If 150 < 100:
+        Print "❌ Not enough coins!"
+        Return False
+    
+    YES, has 150 coins ✓
+
+Step 5: PROCESS PAYMENT (Call Member 1!)
+    seller_id = meme['owner_id'] = "NSU210102"
+    price = 100
+    
+    DEDUCT from buyer:
+    profiles.update_student_coins("NSU210101", -100)
+    Ahmed now has: 150 - 100 = 50 coins
+    
+    ADD to seller:
+    profiles.update_student_coins("NSU210102", 100)
+    Rahat now has: 120 + 100 = 220 coins
+
+Step 6: UPDATE NFT COLLECTIONS (Call Member 1!)
+    Remove from seller:
+    profiles.remove_nft_from_collection("NSU210102", "Power Cut Meme")
+    
+    Add to buyer:
+    profiles.add_nft_to_collection("NSU210101", "Power Cut Meme")
+
+Step 7: UPDATE meme owner
+    meme['owner_id'] = "NSU210101"
+    
+    Save all memes back to memes.txt
+
+Step 8: CHECK for collector achievement
+    Ahmed's NFT count = 1
+    
+    If nft_count >= 10:
+        profiles.unlock_achievement("NSU210101", "Collector")
+
+Print "✅ Meme NFT purchased!"
+
+Return True (success!)
 ```
+
+**Actual Code Location:** Lines 109-158 in member3_memes.py
 
 ---
 
-## 🔄 COMPLETE EXAMPLE: EARNING COINS FROM A QUEST
+### 🧩 MEMBER 4: PERK SHOP (member4_perks.py)
 
-Let's trace what happens when Ahmed completes a quest:
+**What it REALLY does:** Store where students spend coins on real benefits.
 
-### **STEP-BY-STEP FLOW**
+#### **Special Feature: Pre-Populated Perks!**
 
-```
-START
-  ↓
-1. Ahmed opens the program
-   [main.py runs]
-  ↓
-2. Ahmed logs in with ID: NSU210202
-   [Check if ID exists in students.txt]
-   [Yes! Welcome Ahmed!]
-  ↓
-3. Ahmed chooses "Quest Board"
-   [Show quests from quests.txt]
-  ↓
-4. Ahmed sees: "Help 5 Juniors - 50 coins"
-   [Quest ID: Q001]
-  ↓
-5. Ahmed chooses "Accept Quest"
-   [Add Ahmed's ID to quest participants]
-   [Save to quests.txt]
-  ↓
-6. Ahmed helps 5 juniors (happens in real life)
-  ↓
-7. Ahmed chooses "Complete Quest Q001"
-   [Check: Did Ahmed accept this? YES]
-   [Check: Is quest still active? YES]
-  ↓
-8. Give Ahmed his reward:
-   [Read students.txt]
-   [Find Ahmed: NSU210202|Ahmed Khan|100|1]
-   [Change 100 to 150 (100 + 50 reward)]
-   [Write back: NSU210202|Ahmed Khan|150|1]
-  ↓
-9. Update quest status:
-   [Read quests.txt]
-   [Find Q001]
-   [Change "Active" to "Completed"]
-   [Save back to quests.txt]
-  ↓
-10. Check for achievements:
-    [Is this Ahmed's first quest? YES]
-    [Give "First Blood" achievement]
-    [Update students.txt]
-  ↓
-11. Show success message:
-    Print "🎉 Quest Completed!"
-    Print "🪙 Earned 50 MemeCoins"
-    Print "🏅 Achievement Unlocked: First Blood"
-  ↓
-END
-```
+When the program runs for the first time, it automatically creates default perks:
 
----
-
-## 📚 UNDERSTANDING EACH MODULE (For Non-Programmers)
-
-### 🧩 MEMBER 1: STUDENT PROFILES
-
-**What it does in plain English:**
-
-Think of it like a **student ID card system**.
-
-**Functions (Jobs it does):**
-
-1. **Register Student**
-   ```
-   Human: I want to join!
-   Program: What's your ID?
-   Human: NSU210101
-   Program: What's your name?
-   Human: Rahat Ahmed
-   Program: ✅ Done! You start with 100 coins, Level 1
-   Program: [Writes to students.txt: NSU210101|Rahat Ahmed|100|1]
-   ```
-
-2. **Login**
-   ```
-   Human: I want to log in
-   Program: What's your ID?
-   Human: NSU210101
-   Program: [Looks in students.txt for NSU210101]
-   Program: [Found it! Name is Rahat Ahmed]
-   Program: ✅ Welcome back, Rahat Ahmed!
-   ```
-
-3. **Show Profile**
-   ```
-   Program: [Reads students.txt]
-   Program: [Finds your line]
-   Program: Shows you:
-            👤 Name: Rahat Ahmed
-            🪙 Coins: 420
-            ⭐ Level: 5
-            🏆 Title: Meme Lord
-            🏅 Achievements: First Blood, Helper
-   ```
-
-4. **Update Coins** (called by other modules)
-   ```
-   Another module says: "Add 50 coins to NSU210101"
-   This module:
-   - Reads students.txt
-   - Finds NSU210101
-   - Changes 420 to 470
-   - Saves back to file
-   - Checks if level up needed
-   ```
-
-5. **Unlock Achievement**
-   ```
-   Another module says: "Give 'First Blood' to NSU210101"
-   This module:
-   - Reads students.txt
-   - Finds achievements list for NSU210101
-   - Adds "First Blood" to the list
-   - Saves back
-   ```
-
-**The Data (students.txt):**
-```
-NSU210101|Rahat Ahmed|420|5|Meme Lord|850||First Blood,Helper
-    ↑          ↑       ↑   ↑      ↑      ↑   ↑         ↑
-    ID        Name   Coins Lvl  Title   Rep NFTs   Achievements
-```
-
----
-
-### 🧩 MEMBER 2: QUEST SYSTEM
-
-**What it does in plain English:**
-
-Think of it like a **task board** where people post tasks and others can accept them.
-
-**Functions:**
-
-1. **View All Quests**
-   ```
-   Program: [Reads quests.txt]
-   Program: [Shows only "Active" quests]
-   Program: Displays:
-            🎯 Quest 1: Help 5 Juniors
-               Reward: 50 coins
-               Type: Academic
-               Difficulty: Medium
-            
-            🎯 Quest 2: Organize Event
-               Reward: 30 coins
-               Type: Social
-               Difficulty: Easy
-   ```
-
-2. **Create Quest**
-   ```
-   Human: I want to create a quest
-   Program: What's the title?
-   Human: Help me with Python
-   Program: Description?
-   Human: Debug my code
-   Program: How much reward?
-   Human: 20 coins
-   Program: [Generates ID: Q003]
-   Program: [Writes to quests.txt:
-            Q003|Help me with Python|Debug my code|20|Academic|Easy|NSU210101|Active|]
-   Program: ✅ Quest created! ID: Q003
-   ```
-
-3. **Accept Quest**
-   ```
-   Human: I want to accept quest Q001
-   Program: [Reads quests.txt]
-   Program: [Finds Q001]
-   Program: [Checks: Is it Active? YES]
-   Program: [Adds your ID to participants list]
-   Program: [Saves back: Q001|...|Active|NSU210202,NSU210303]
-   Program: ✅ Quest accepted!
-   ```
-
-4. **Complete Quest**
-   ```
-   Human: I completed quest Q001
-   Program: [Checks: Did you accept it? YES]
-   Program: [Checks: Is it still Active? YES]
-   Program: [Changes status to "Completed"]
-   Program: [Calls Member 1's "update_coins" function]
-   Program: [Member 1 adds reward to your account]
-   Program: ✅ Quest completed! Earned 50 coins!
-   ```
-
-**The Data (quests.txt):**
-```
-Q001|Help 5 Juniors|Tutor them|50|Academic|Medium|NSU210101|Active|NSU210202
-  ↑        ↑            ↑       ↑      ↑        ↑        ↑      ↑         ↑
- ID     Title        Desc    Reward  Type    Diff   Creator Status  Participants
-```
-
----
-
-### 🧩 MEMBER 3: MEME NFT MARKETPLACE
-
-**What it does in plain English:**
-
-Think of it like **trading cards** - create them, collect them, trade them.
-
-**Functions:**
-
-1. **Create Meme**
-   ```
-   Human: I want to create a meme
-   Program: What's the meme called?
-   Human: CSE Power Cut Meme
-   Program: Description?
-   Human: That moment when lights went out during exam
-   Program: [Decides rarity based on randomness or rules]
-   Program: Rarity: Legendary!
-   Program: [Generates ID: NFT001]
-   Program: [Writes to memes.txt:
-            NFT001|CSE Power Cut|That moment...|NSU210101|Legendary|100|NSU210101|0]
-   Program: ✅ Meme created! It's Legendary!
-   ```
-
-2. **Browse Marketplace**
-   ```
-   Program: [Reads memes.txt]
-   Program: Shows all memes:
-            🎨 NFT001: CSE Power Cut
-               Creator: NSU210101
-               Rarity: Legendary
-               Price: 100 coins
-               Owner: NSU210101
-               Likes: 45
-            
-            🎨 NFT002: Drake Hotline
-               Creator: NSU210202
-               Rarity: Rare
-               Price: 50 coins
-               Owner: NSU210505
-               Likes: 23
-   ```
-
-3. **Buy Meme**
-   ```
-   Human: I want to buy NFT001
-   Program: [Finds NFT001 in memes.txt]
-   Program: Price: 100 coins
-   Program: [Checks your balance: Do you have 100? YES]
-   Program: [Calls Member 1: Remove 100 from buyer]
-   Program: [Calls Member 1: Add 100 to seller]
-   Program: [Changes owner in memes.txt: NFT001|...|NewOwner|...]
-   Program: ✅ Meme purchased!
-   ```
-
-4. **Like Meme**
-   ```
-   Human: I like NFT001
-   Program: [Finds NFT001]
-   Program: [Current likes: 45]
-   Program: [Changes to: 46]
-   Program: [Saves back]
-   Program: ✅ Liked!
-   ```
-
-**The Data (memes.txt):**
-```
-NFT001|CSE Power Cut|That moment...|NSU210101|Legendary|100|NSU210505|89
-   ↑         ↑              ↑             ↑          ↑      ↑      ↑      ↑
-  ID       Name          Desc         Creator    Rarity  Price  Owner  Likes
-```
-
----
-
-### 🧩 MEMBER 4: PERK SHOP
-
-**What it does in plain English:**
-
-Think of it like an **online shop** - browse items, buy them, use them.
-
-**Functions:**
-
-1. **View Available Perks**
-   ```
-   Program: [Reads perks.txt]
-   Program: Shows:
-            🛒 PERK01: Canteen Queue Skip
-               Cost: 30 coins
-               Quantity left: 10
-               Valid for: 1 day
-            
-            🛒 PERK02: Premium Notes Access
-               Cost: 50 coins
-               Quantity left: 5
-               Valid for: 1 week
-   ```
-
-2. **Purchase Perk**
-   ```
-   Human: I want to buy PERK01
-   Program: [Finds PERK01 in perks.txt]
-   Program: Cost: 30 coins
-   Program: [Checks your balance: Do you have 30? YES]
-   Program: [Calls Member 1: Remove 30 coins from you]
-   Program: [Reduces quantity in perks.txt: 10 → 9]
-   Program: [Writes to inventory.txt:
-            NSU210101|PERK01|2025-01-31|Active]
-   Program: ✅ Perk purchased!
-   ```
-
-3. **View My Inventory**
-   ```
-   Program: [Reads inventory.txt]
-   Program: [Filters for your ID]
-   Program: Shows:
-            📦 Your Perks:
-            ✓ Canteen Queue Skip (Active)
-            ✓ Premium Notes Access (Used)
-   ```
-
-4. **Redeem Perk**
-   ```
-   Human: I want to use PERK01
-   Program: [Finds PERK01 in your inventory]
-   Program: [Checks: Is it Active? YES]
-   Program: [Changes status to "Used"]
-   Program: ✅ Perk redeemed! Show this to canteen staff!
-   ```
-
-**The Data:**
-```
-perks.txt:
-PERK01|Queue Skip|30|10|Instant|ADMIN|1 day
-   ↑        ↑      ↑  ↑     ↑      ↑      ↑
-  ID      Name   Cost Qty  Type  Seller  Validity
-
-inventory.txt:
-NSU210101|PERK01|2025-01-31|Active
-    ↑        ↑         ↑        ↑
-Student  Perk   Purchase   Status
-                  Date
-```
-
----
-
-### 🧩 MEMBER 5: SOCIAL CREDIT ENGINE
-
-**What it does in plain English:**
-
-Think of it like **Venmo/bKash** - send money (coins) to friends, track transactions.
-
-**Functions:**
-
-1. **Send Coins**
-   ```
-   Human: I want to send 15 coins to NSU210505
-   Program: Reason?
-   Human: Helped me with homework
-   Program: [Checks: Do you have 15 coins? YES]
-   Program: [Calls Member 1: Remove 15 from you]
-   Program: [Calls Member 1: Add 15 to NSU210505]
-   Program: [Generates ID: T001]
-   Program: [Gets current time: 2025-01-31 14:30]
-   Program: [Writes to transactions.txt:
-            T001|NSU210101|NSU210505|15|Helped with homework|False|2025-01-31 14:30]
-   Program: ✅ Sent 15 coins to NSU210505!
-   ```
-
-2. **View Transaction History**
-   ```
-   Program: [Reads transactions.txt]
-   Program: [Finds all transactions where you sent OR received]
-   Program: Shows:
-            💸 Transaction History:
-            
-            ↗️ Sent: 15 coins to NSU210505
-               Reason: Helped with homework
-               Date: 2025-01-31 14:30
-               Status: Unverified
-            
-            ↙️ Received: 20 coins from NSU210202
-               Reason: Quest reward
-               Date: 2025-01-30 10:00
-               Status: Verified ✓
-   ```
-
-3. **Verify Transaction**
-   ```
-   Human: I want to verify transaction T001
-   Program: [Reads transactions.txt]
-   Program: [Finds T001]
-   Program: [Changes "False" to "True"]
-   Program: [Saves back]
-   Program: [Updates reputation for both people]
-   Program: ✅ Transaction verified!
-   ```
-
-4. **Calculate Reputation**
-   ```
-   Program: [Reads all transactions]
-   Program: [Counts verified transactions you sent]
-   Program: [Counts verified transactions you received]
-   Program: [Formula: (sent_count × 10) + (received_count × 5)]
-   Program: Your reputation: 850 points
-   ```
-
-**The Data (transactions.txt):**
-```
-T001|NSU210101|NSU210505|15|Helped with homework|True|2025-01-31 14:30
-  ↑       ↑         ↑     ↑           ↑           ↑          ↑
- ID     From       To   Amount     Reason      Verified  Timestamp
-```
-
----
-
-### 🧩 MEMBER 6: LEADERBOARDS & ANALYTICS
-
-**What it does in plain English:**
-
-Think of it like **game rankings** - who has the most coins? Who helped the most?
-
-**Functions:**
-
-1. **Show Richest Students**
-   ```
-   Program: [Reads students.txt]
-   Program: [Gets all students]
-   Program: [Sorts by coins - highest first]
-   Program: Shows:
-            🏆 RICHEST STUDENTS
-            
-            1. 🥇 Rahat Ahmed - 520 coins
-            2. 🥈 Nadia Khan - 450 coins
-            3. 🥉 Ahmed Hossain - 380 coins
-            4. 📍 Fahim Rahman - 320 coins
-            5. 📍 Sara Islam - 280 coins
-   ```
-
-2. **Show Quest Leaders**
-   ```
-   Program: [Reads quests.txt]
-   Program: [For each student:]
-   Program:    [Count how many quests they completed]
-   Program: [Sort by count - highest first]
-   Program: Shows:
-            🎯 QUEST LEADERS
-            
-            1. Ahmed - 15 quests completed
-            2. Nadia - 12 quests completed
-            3. Rahat - 10 quests completed
-   ```
-
-3. **Show Most Helpful**
-   ```
-   Program: [Reads transactions.txt]
-   Program: [For each student:]
-   Program:    [Count coins they SENT to others]
-   Program: [Sort by amount - highest first]
-   Program: Shows:
-            💝 MOST HELPFUL
-            
-            1. Rahat - Sent 500 coins total
-            2. Ahmed - Sent 350 coins total
-            3. Nadia - Sent 280 coins total
-   ```
-
-4. **Show My Analytics**
-   ```
-   Program: [Reads multiple files]
-   Program: Calculates:
-            - Total coins earned
-            - Total coins spent
-            - Quests completed
-            - Memes created
-            - Position in rankings
-   
-   Program: Shows:
-            📊 YOUR STATS (NSU210101)
-            
-            💰 Financial:
-               Total Earned: 850 coins
-               Total Spent: 430 coins
-               Current Balance: 420 coins
-            
-            🎯 Quests:
-               Completed: 10
-               Created: 5
-               Success Rate: 90%
-            
-            🎨 Memes:
-               Created: 3
-               Total Likes: 156
-               Average Rarity: Rare
-            
-            🏆 Rankings:
-               Richest: #2
-               Quest Leader: #3
-               Most Helpful: #1
-   ```
-
-**No new data files - reads from everyone else's files!**
-
----
-
-## 🔗 HOW MODULES TALK TO EACH OTHER
-
-### Example: Completing a Quest
-
-```
-1. YOU (User) interact with MEMBER 2 (Quests)
-   ↓
-2. MEMBER 2 says: "Quest completed! Give reward!"
-   ↓
-3. MEMBER 2 calls MEMBER 1 (Profiles)
-   "Hey Member 1, add 50 coins to NSU210101"
-   ↓
-4. MEMBER 1 does the work:
-   - Opens students.txt
-   - Finds NSU210101
-   - Adds 50 to their coins
-   - Saves file
-   - Checks for level up
-   ↓
-5. MEMBER 1 responds: "Done! Also, they leveled up!"
-   ↓
-6. MEMBER 2 shows you: "✅ Quest completed! +50 coins! Level up!"
-   ↓
-7. Meanwhile, MEMBER 6 (Leaderboards) can read the updated
-   students.txt and show new rankings
-```
-
-### Another Example: Buying a Perk
-
-```
-1. YOU interact with MEMBER 4 (Perk Shop)
-   "I want to buy PERK01"
-   ↓
-2. MEMBER 4 checks: "This costs 30 coins"
-   ↓
-3. MEMBER 4 asks MEMBER 1: "Does this person have 30 coins?"
-   ↓
-4. MEMBER 1 checks students.txt: "Yes, they have 420 coins"
-   ↓
-5. MEMBER 4 tells MEMBER 1: "Remove 30 coins from them"
-   ↓
-6. MEMBER 1 updates: 420 → 390 in students.txt
-   ↓
-7. MEMBER 4 adds perk to inventory.txt
-   ↓
-8. MEMBER 4 shows: "✅ Perk purchased! 390 coins remaining"
-```
-
----
-
-## 🎨 VISUAL FLOWCHART
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                     USER OPENS PROGRAM                   │
-└─────────────────────────────────────────────────────────┘
-                            │
-                            ↓
-              ┌─────────────────────────┐
-              │   main.py (YOU)         │
-              │   Shows main menu       │
-              └─────────────────────────┘
-                            │
-        ┌───────────────────┼───────────────────┐
-        │                   │                   │
-        ↓                   ↓                   ↓
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│  MEMBER 1    │    │  MEMBER 2    │    │  MEMBER 3    │
-│  Profiles    │◄───┤  Quests      │    │  Memes       │
-│              │    │              │    │              │
-│ students.txt │    │ quests.txt   │    │ memes.txt    │
-└──────────────┘    └──────────────┘    └──────────────┘
-        ↑                   ↑                   ↑
-        │                   │                   │
-        └───────────────────┴───────────────────┘
-                            │
-                    MEMBER 1 manages
-                    coins for everyone!
-                            │
-        ┌───────────────────┼───────────────────┐
-        │                   │                   │
-        ↓                   ↓                   ↓
-┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│  MEMBER 4    │    │  MEMBER 5    │    │  MEMBER 6    │
-│  Perks       │    │  Social      │    │ Leaderboards │
-│              │    │  Credit      │    │              │
-│ perks.txt    │    │ trans.txt    │    │ Reads all!   │
-│ inventory.txt│    │              │    │              │
-└──────────────┘    └──────────────┘    └──────────────┘
-```
-
----
-
-## 💡 KEY CONCEPTS EXPLAINED
-
-### What is a "Function"?
-
-**Think of it like a recipe:**
-- **Name**: "Make Sandwich"
-- **Ingredients** (inputs): bread, cheese, tomato
-- **Steps**: put cheese on bread, add tomato, close
-- **Result** (output): sandwich
-
-**In code:**
 ```python
-def make_sandwich(bread, cheese, tomato):
-    put cheese on bread
-    add tomato
-    close sandwich
-    return sandwich
+# In Plain English:
+
+When program starts:
+    Check if perks.txt exists
+    
+    If NOT exists:
+        Create perks.txt
+        Write these default perks:
+            PERK01|Canteen Queue Skip|30|10|Instant|CSE Club|1 day
+            PERK02|Premium Notes Access|50|5|Academic|EEE Club|1 week
+            PERK03|Front Row Seat|40|8|Instant|Admin|1 day
+            PERK04|Library Late Return|60|3|Academic|Library|3 days
+            PERK05|Gaming Zone Priority|25|15|Instant|CSE Club|2 hours
 ```
 
-### What is a "File"?
+**Actual Code Location:** Lines 21-27 in member4_perks.py
 
-**Like a notebook:**
-- You write things down
-- You can read them later
-- You can change what you wrote
-- Information stays even when you close the book
+#### **Function: purchase_perk(student_id, perk_id)**
 
-**In our project:**
-- `students.txt` = notebook for student info
-- `quests.txt` = notebook for quests
-- etc.
-
-### What is "Reading from File"?
-
-**Like opening a book and reading:**
 ```python
-# In English:
-Open the book (file)
-Read each page (line)
-Remember what you read (store in variables)
-Close the book
+# In Plain English:
+
+Received: student_id = "NSU210101", perk_id = "PERK01"
+
+Step 1: GET all perks
+    Open perks.txt
+    perks = [
+        {id: "PERK01", name: "Canteen Queue Skip",
+         cost: 30, quantity: 10, type: "Instant", ...}
+    ]
+
+Step 2: FIND the perk
+    Loop through perks:
+        If perk['id'] == "PERK01":
+            Found it!
+
+Step 3: CHECK quantity available
+    perk['quantity'] = 10
+    
+    If quantity <= 0:
+        Print "❌ Out of stock!"
+        Return False
+    
+    Available ✓
+
+Step 4: CHECK if student has enough coins
+    student = profiles.get_student_by_id("NSU210101")
+    student['coins'] = 50
+    perk['cost'] = 30
+    
+    If 50 < 30:
+        Print "❌ Not enough coins!"
+        Return False
+    
+    YES, has enough ✓
+
+Step 5: DEDUCT coins (Call Member 1!)
+    profiles.update_student_coins("NSU210101", -30)
+    Ahmed now has: 50 - 30 = 20 coins
+
+Step 6: REDUCE quantity
+    perk['quantity'] = 10 - 1 = 9
+    
+    Save all perks back to perks.txt
+
+Step 7: ADD to student's inventory
+    Get current date/time: "2025-01-31 14:30"
+    
+    Open inventory.txt in "append" mode
+    Write new line:
+        "NSU210101|PERK01|2025-01-31 14:30|Active\n"
+    Close file
+
+Print "✅ Perk purchased!"
+Print "🎁 You bought: Canteen Queue Skip"
+Print "🪙 Remaining balance: 20 MemeCoins"
+
+Return True (success!)
 ```
 
-### What is "Writing to File"?
-
-**Like writing in a book:**
-```python
-# In English:
-Open the book (file)
-Write new information (lines of text)
-Close the book (save changes)
-```
-
-### What is a "Variable"?
-
-**Like a box with a label:**
-- Box labeled "coins" contains: 420
-- Box labeled "name" contains: "Rahat Ahmed"
-- Box labeled "level" contains: 5
-
-**You can:**
-- Check what's in the box
-- Change what's in the box
-- Use what's in the box
+**Actual Code Location:** Lines 97-143 in member4_perks.py
 
 ---
 
-## 🎯 SUMMARY FOR EACH MEMBER
+### 🧩 MEMBER 5: SOCIAL CREDIT ENGINE (member5_social.py)
 
-### MEMBER 1 (Profiles)
-**You're the ID card office**
-- Register new students
-- Let them log in
-- Show their stats
-- Manage their coins (other modules ask you to add/remove)
-- Track achievements
+**What it REALLY does:** Peer-to-peer payment and reputation system.
 
-### MEMBER 2 (Quests)
-**You're the task board**
-- Let people post tasks
-- Let others accept tasks
-- Mark tasks complete
-- Ask Member 1 to give rewards
+#### **Function: send_coins(from_id, to_id, amount, reason)**
 
-### MEMBER 3 (Memes)
-**You're the art gallery / trading card shop**
-- Let people create memes
-- Display memes for sale
-- Handle buying/selling
-- Track likes
+```python
+# In Plain English:
 
-### MEMBER 4 (Perks)
-**You're the campus store**
-- Show available perks
-- Handle purchases
-- Track who bought what
-- Let people use their perks
+Received: from_id = "NSU210101", to_id = "NSU210102", 
+          amount = 15, reason = "Helped with homework"
 
-### MEMBER 5 (Social Credit)
-**You're the payment system**
-- Let people send coins to each other
-- Track all transactions
-- Verify good deeds
-- Calculate reputation
+Step 1: VALIDATE inputs
+    If from_id == to_id:
+        Print "❌ Can't send to yourself!"
+        Return False
+    
+    If amount <= 0:
+        Print "❌ Amount must be positive!"
+        Return False
+    
+    Valid ✓
 
-### MEMBER 6 (Leaderboards)
-**You're the scoreboard**
-- Count everyone's stats
-- Sort them by different criteria
-- Show rankings
-- Display analytics
+Step 2: CHECK sender exists and has enough coins
+    sender = profiles.get_student_by_id("NSU210101")
+    sender['coins'] = 20
+    
+    If sender doesn't exist:
+        Print "❌ Sender not found!"
+        Return False
+    
+    If 20 < 15:
+        Print "❌ Not enough coins!"
+        Return False
+    
+    YES, has 20 coins ✓
+
+Step 3: CHECK receiver exists
+    receiver = profiles.get_student_by_id("NSU210102")
+    
+    If receiver doesn't exist:
+        Print "❌ Receiver not found!"
+        Return False
+    
+    Receiver exists ✓
+
+Step 4: PROCESS TRANSFER (Call Member 1!)
+    DEDUCT from sender:
+    profiles.update_student_coins("NSU210101", -15)
+    Ahmed now has: 20 - 15 = 5 coins
+    
+    ADD to receiver:
+    profiles.update_student_coins("NSU210102", 15)
+    Rahat now has: 220 + 15 = 235 coins
+
+Step 5: LOG transaction
+    Count existing transactions: 0
+    txn_id = "T001"
+    
+    Get current timestamp: "2025-01-31 14:30"
+    
+    Open transactions.txt in "append" mode
+    Write new line:
+        "T001|NSU210101|NSU210102|15|Helped with homework|False|2025-01-31 14:30\n"
+        (id|from|to|amount|reason|verified|timestamp)
+    
+    NOTE: verified = False (pending confirmation!)
+
+Print "✅ Transaction successful!"
+Print "💸 Sent 15 MemeCoins to NSU210102"
+Print "⚠️  Transaction is UNVERIFIED until receiver confirms"
+
+Return True (success!)
+```
+
+**Actual Code Location:** Lines 54-112 in member5_social.py
+
+#### **Function: verify_transaction(txn_id, verifier_id)**
+
+```python
+# In Plain English:
+
+Received: txn_id = "T001", verifier_id = "NSU210102"
+
+Step 1: GET all transactions
+    Open transactions.txt
+    transactions = [
+        {id: "T001", from_id: "NSU210101", to_id: "NSU210102",
+         amount: 15, reason: "Helped with homework",
+         verified: False, timestamp: "2025-01-31 14:30"}
+    ]
+
+Step 2: FIND the transaction
+    Loop through transactions:
+        If txn['id'] == "T001":
+            Found it!
+
+Step 3: CHECK if verifier is the receiver
+    txn['to_id'] = "NSU210102"
+    verifier_id = "NSU210102"
+    
+    If they don't match:
+        Print "❌ You can only verify transactions sent TO you!"
+        Return False
+    
+    Match ✓ (Rahat received, Rahat is verifying)
+
+Step 4: CHECK if already verified
+    txn['verified'] = False
+    
+    If already True:
+        Print "❌ Already verified!"
+        Return False
+    
+    Not verified yet ✓
+
+Step 5: MARK as verified
+    txn['verified'] = True
+    
+    Save all transactions back to transactions.txt
+
+Step 6: UPDATE REPUTATION (Call Member 1!)
+    Sender gets +10 points:
+    profiles.update_reputation("NSU210101", 10)
+    
+    Receiver gets +5 points:
+    profiles.update_reputation("NSU210102", 5)
+
+Step 7: CHECK for achievements
+    Count Ahmed's verified sent transactions: 1
+    
+    If count == 5:
+        profiles.unlock_achievement("NSU210101", "Helper")
+    
+    If count == 10:
+        profiles.unlock_achievement("NSU210101", "Social Butterfly")
+
+Print "✅ Transaction verified!"
+Print "🎉 Reputation updated"
+
+Return True (success!)
+```
+
+**Actual Code Location:** Lines 148-198 in member5_social.py
 
 ---
 
-## ✅ CHECKLIST: DO YOU UNDERSTAND?
+### 🧩 MEMBER 6: LEADERBOARDS & ANALYTICS (member6_leaderboards.py)
 
-Answer these questions:
+**What it REALLY does:** Read ALL data, create rankings, show stats.
 
-1. **What does our project do?**
-   - Gamifies campus life with coins, quests, and rewards
+**SPECIAL: This module doesn't create any data - it only reads!**
 
-2. **Where is data stored?**
-   - In text files (students.txt, quests.txt, etc.)
+#### **Function: show_richest()**
 
-3. **How do modules communicate?**
-   - Through files and by calling each other's functions
+```python
+# In Plain English:
 
-4. **What's your module do?**
-   - [Read your section above!]
+Step 1: GET all students (from Member 1's file!)
+    Call: students = profiles.get_all_students()
+    students = [
+        {id: "NSU210101", name: "Ahmed", coins: 5, ...},
+        {id: "NSU210102", name: "Rahat", coins: 235, ...},
+        {id: "NSU210103", name: "Sara", coins: 150, ...}
+    ]
 
-5. **Can you explain your module to a friend?**
-   - Try it! Use the plain English explanations above
+Step 2: CHECK if any students exist
+    If students is empty:
+        Print "❌ No students registered!"
+        Return
+    
+    Students exist ✓
 
-If you can answer these, **you understand the project!** 🎉
+Step 3: SORT by coins (highest first)
+    Python's sorted() function:
+    sorted_students = sorted(students, 
+                            key=lambda x: x['coins'], 
+                            reverse=True)
+    
+    Result:
+    [
+        {id: "NSU210102", name: "Rahat", coins: 235},
+        {id: "NSU210103", name: "Sara", coins: 150},
+        {id: "NSU210101", name: "Ahmed", coins: 5}
+    ]
 
-The actual coding is just translating these English instructions into Python syntax, which you'll learn from PYTHON_BASICS.md.
+Step 4: TAKE top 10
+    top_10 = sorted_students[0:10]
+    
+    (In our example, only 3 students, so top_10 has 3)
 
-**YOU GOT THIS!** 💪
+Step 5: DISPLAY with medals
+    Print header
+    
+    For each student, number 1 to 10:
+        If position 1: medal = "🥇"
+        If position 2: medal = "🥈"
+        If position 3: medal = "🥉"
+        Else: medal = "4.", "5.", etc.
+        
+        Print:
+        "🥇 Rahat (NSU210102)"
+        "   💰 Coins: 235"
+        "   ⭐ Level: 3 (Regular)"
+        
+        "🥈 Sara (NSU210103)"
+        "   💰 Coins: 150"
+        "   ⭐ Level: 2 (Noob)"
+        
+        "🥉 Ahmed (NSU210101)"
+        "   💰 Coins: 5"
+        "   ⭐ Level: 1 (Noob)"
+
+Done!
+```
+
+**Actual Code Location:** Lines 38-69 in member6_leaderboards.py
+
+#### **Function: show_analytics(student_id)**
+
+This is the MOST COMPLEX function - it reads from EVERYONE!
+
+```python
+# In Plain English:
+
+Received: student_id = "NSU210101"
+
+Step 1: GET student profile
+    student = profiles.get_student_by_id("NSU210101")
+    If not found:
+        Print "❌ Student not found!"
+        Return
+
+Step 2: GET all quests (from Member 2's file!)
+    all_quests = quests.get_all_quests()
+
+Step 3: GET all transactions (from Member 5's file!)
+    all_transactions = social.get_all_transactions()
+
+Step 4: GET all memes (from Member 3's file!)
+    Open memes.txt
+    Read all memes
+
+Step 5: CALCULATE quest statistics
+    Count quests Ahmed completed:
+    quests_completed = 0
+    For each quest in all_quests:
+        If quest['status'] == "Completed" AND
+           "NSU210101" in quest['participants']:
+            quests_completed += 1
+    
+    Count quests Ahmed created:
+    quests_created = 0
+    For each quest in all_quests:
+        If quest['creator_id'] == "NSU210101":
+            quests_created += 1
+    
+    Sum reward coins from quests:
+    quest_rewards = 0
+    For each completed quest Ahmed did:
+        quest_rewards += quest['reward']
+
+Step 6: CALCULATE transaction statistics
+    Sum coins Ahmed sent:
+    coins_sent = 0
+    For each txn in all_transactions:
+        If txn['from_id'] == "NSU210101":
+            coins_sent += txn['amount']
+    
+    Sum coins Ahmed received:
+    coins_received = 0
+    For each txn in all_transactions:
+        If txn['to_id'] == "NSU210101":
+            coins_received += txn['amount']
+
+Step 7: CALCULATE meme statistics
+    Count memes Ahmed created:
+    memes_created = 0
+    total_likes = 0
+    For each meme in all_memes:
+        If meme['creator_id'] == "NSU210101":
+            memes_created += 1
+            total_likes += meme['likes']
+
+Step 8: CALCULATE total earned
+    total_earned = 100 (starting) + quest_rewards + coins_received
+
+Step 9: CALCULATE total spent
+    total_spent = total_earned - student['coins']
+
+Step 10: CALCULATE rankings
+    Get all students
+    Sort by coins → find Ahmed's position
+    coin_rank = 3 (Ahmed is 3rd richest)
+    
+    Sort by reputation → find Ahmed's position
+    rep_rank = 2 (Ahmed is 2nd in reputation)
+
+Step 11: DISPLAY everything beautifully
+    Print "📊 COMPLETE ANALYTICS: Ahmed"
+    Print "💰 FINANCIAL OVERVIEW:"
+    Print "   Current Balance: 5 coins"
+    Print "   Total Earned: 135 coins"
+    Print "   Total Spent: 130 coins"
+    
+    Print "🎯 QUEST STATISTICS:"
+    Print "   Quests Completed: 1"
+    Print "   Quests Created: 1"
+    Print "   Coins from Quests: 50"
+    
+    Print "💸 SOCIAL CREDIT:"
+    Print "   Coins Sent: 15"
+    Print "   Coins Received: 0"
+    Print "   Reputation: 10"
+    
+    Print "🎨 MEME ACTIVITY:"
+    Print "   Memes Created: 0"
+    Print "   Total Likes: 0"
+    Print "   NFTs Owned: 1"
+    
+    Print "📊 YOUR RANKINGS:"
+    Print "   Richest: #3 out of 3"
+    Print "   Reputation: #2 out of 3"
+
+Done!
+```
+
+**Actual Code Location:** Lines 214-301 in member6_leaderboards.py
+
+---
+
+## 🔗 HOW MODULES COMMUNICATE
+
+### **The Central Hub Pattern**
+
+```
+         All Modules Call Member 1 for Coins!
+         
+    Member 2 (Quests) ─────┐
+    Member 3 (Memes)  ─────┤
+    Member 4 (Perks)  ─────┼──→ Member 1 (Profiles)
+    Member 5 (Social) ─────┤      - update_student_coins()
+                           │      - unlock_achievement()
+                           │      - add_nft_to_collection()
+                           │
+    Member 6 (Boards) ─────┘
+    (Only reads, doesn't call)
+```
+
+### **Example: Quest Completion Flow**
+
+```
+User → Main Menu → Quest Module
+                      ↓
+                Quest calls:
+                profiles.update_student_coins(id, 50)
+                      ↓
+                Profile Module:
+                - Reads students.txt
+                - Adds 50 coins
+                - Checks level up
+                - Saves students.txt
+                      ↓
+                Returns success to Quest Module
+                      ↓
+                Quest calls:
+                profiles.unlock_achievement(id, "First Blood")
+                      ↓
+                Profile Module:
+                - Reads students.txt
+                - Adds achievement
+                - Saves students.txt
+                      ↓
+                Returns to Quest Module
+                      ↓
+                Quest shows: "✅ Quest Complete!"
+                      ↓
+                Returns to Main Menu
+```
+
+---
+
+## ✅ QUICK REFERENCE: WHO DOES WHAT
+
+### Member 1 (Profiles):
+- ✅ CREATE students
+- ✅ MANAGE coins (everyone calls this!)
+- ✅ TRACK achievements
+- ✅ MANAGE NFT collections
+- ✅ HANDLE reputation
+
+### Member 2 (Quests):
+- ✅ CREATE quests
+- ✅ LET students accept quests
+- ✅ MARK complete
+- ✅ CALL Member 1 to give rewards
+
+### Member 3 (Memes):
+- ✅ CREATE meme NFTs
+- ✅ SHOW marketplace
+- ✅ HANDLE buying/selling
+- ✅ CALL Member 1 for payments
+
+### Member 4 (Perks):
+- ✅ SHOW perks (auto-created!)
+- ✅ HANDLE purchases
+- ✅ TRACK inventory
+- ✅ CALL Member 1 to charge
+
+### Member 5 (Social):
+- ✅ SEND coins between students
+- ✅ LOG transactions
+- ✅ VERIFY good deeds
+- ✅ CALL Member 1 for transfers
+
+### Member 6 (Leaderboards):
+- ✅ READ all files
+- ✅ SORT and rank
+- ✅ SHOW statistics
+- ✅ CALCULATE analytics
+
+---
+
+## 🎓 YOU NOW UNDERSTAND IT ALL!
+
+If you can answer these, you GET IT:
+
+1. **Where is data stored?** → Text files in data/ folder
+2. **How do modules talk?** → Through files and function calls
+3. **Who manages coins?** → Member 1 (everyone calls them)
+4. **What triggers achievements?** → Different modules based on actions
+5. **How are leaderboards made?** → Member 6 reads all files and sorts
+
+**YOU'RE READY TO PRESENT!** 🎉
