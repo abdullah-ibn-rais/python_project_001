@@ -1,0 +1,5 @@
+PERK01|Canteen Queue Skip|30|10|Instant|CSE Club|1 day
+PERK02|Premium Notes Access|50|5|Academic|EEE Club|1 week
+PERK03|Front Row Seat|40|8|Instant|Admin|1 day
+PERK04|Library Late Return|60|3|Academic|Library|3 days
+PERK05|Gaming Zone Priority|25|15|Instant|CSE Club|2 hours
